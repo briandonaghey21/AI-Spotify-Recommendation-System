@@ -7,4 +7,4 @@
 3. Link user's account data with the engine so the recommendations are more personalized
 4. Machine learning to optimize the results
 5. Front-end
-6. Deploy
+6. Deployment probably with AWS
