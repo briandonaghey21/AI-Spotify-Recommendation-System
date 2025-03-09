@@ -1,0 +1,3 @@
+pip install flask spotipy flask-cors
+
+source venv/bin/activate
