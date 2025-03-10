@@ -12,4 +12,5 @@
 
 ### Reminders/TODO
 - change redirect url on deployment
--Postman for easy api testing
+- Postman for easy api testing
+- Recommendation is deprecated, come up with a new plan
