@@ -1,3 +1,5 @@
 pip install flask spotipy flask-cors
+pip install python-dotenv
 
-source venv/bin/activate
+
+source venv/bin/activate for venv

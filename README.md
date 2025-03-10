@@ -8,3 +8,7 @@
 4. Machine learning to optimize the results
 5. Front-end
 6. Deployment probably with AWS
+
+
+### Reminders/TODO
+- change redirect url on deployment
