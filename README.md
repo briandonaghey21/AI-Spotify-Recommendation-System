@@ -1,5 +1,6 @@
-# AI-Spotify-Recommendation-System ![Alt text](spotify.webp)
- I'm currently planning to develop an AI-powered Spotify recommendation system that recommends songs/playlists based off of user recommendation and input. For example, they could input "running-vibe playlist", "songs like 'SONG_NAME'", "'SONG_ARTISTS' most popular songs'".
+# AI-Spotify-Recommendation-System <img src="spotify.webp" alt="AI-Spotify-Recommendation-System" width="50">
+
+I'm currently planning to develop an AI-powered Spotify recommendation system that recommends songs/playlists based off of user recommendation and input. For example, they could input "running-vibe playlist", "songs like 'SONG_NAME'", "'SONG_ARTISTS' most popular songs'".
 
 ## Roadmap
 1. Get a basic recommendation system using a single song
@@ -9,9 +10,8 @@
 5. Front-end
 6. Deployment probably with AWS
 
-
 ### Reminders/TODO
-- change redirect url on deployment
-- Postman for easy api testing
-- ~~Recommendation is deprecated, come up with a new plan~~ Compare songs based on danceability, tempo, energy etc and use that for recommendations
-- gitignore for .env and cache
+- Change redirect URL on deployment
+- Postman for easy API testing
+- ~~Recommendation is deprecated, come up with a new plan~~ Compare songs based on danceability, tempo, energy, etc., and use that for recommendations
+- `.giti
