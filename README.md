@@ -13,5 +13,5 @@ I'm currently planning to develop an AI-powered Spotify recommendation system th
 ### Reminders/TODO
 - Change redirect URL on deployment
 - Postman for easy API testing
-- ~~Recommendation is deprecated, come up with a new plan~~ Compare songs based on danceability, tempo, energy, etc., and use that for recommendations
+- ~~Recommendation is deprecated, come up with a new plan~~ Compare songs based on danceability, tempo, energy, etc., and use that for recommendations https://developer.spotify.com/documentation/web-api/reference/get-audio-features
 - `.giti
