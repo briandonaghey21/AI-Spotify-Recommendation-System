@@ -59,11 +59,7 @@ def recommend():
     genres = artist_info.get("genres", [])
     genre_seed = genres[0] if genres else "pop"
 
-    print("Using genre seed:", genre_seed)
-    print("Requesting recommendations with:")
-    print("    - seed_tracks:", song_id)
-    print("    - seed_artists:", artist_id)
-    print("    - seed_genres:", genre_seed)
+
 
     try:
         recommendations = sp.recommendations(
