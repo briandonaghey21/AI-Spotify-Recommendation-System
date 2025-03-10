@@ -1,4 +1,4 @@
-# AI-Spotify-Recommendation-System
+# AI-Spotify-Recommendation-System ![Alt text](spotify.webp)
  I'm currently planning to develop an AI-powered Spotify recommendation system that recommends songs/playlists based off of user recommendation and input. For example, they could input "running-vibe playlist", "songs like 'SONG_NAME'", "'SONG_ARTISTS' most popular songs'".
 
 ## Roadmap
