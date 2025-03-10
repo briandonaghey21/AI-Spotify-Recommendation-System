@@ -12,3 +12,4 @@
 
 ### Reminders/TODO
 - change redirect url on deployment
+-Postman for easy api testing

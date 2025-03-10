@@ -1,5 +1,8 @@
-pip install flask spotipy flask-cors
-pip install python-dotenv
-
+pip install flask spotipy flask-cors python-dotenv
 
 source venv/bin/activate for venv
+
+https://developer.spotify.com/dashboard/0030a7da05d945b799c2b0db6d5b20e7
+
+to run
+python3 backend/app.py
