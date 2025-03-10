@@ -1,4 +1,4 @@
-# AI-Spotify-Recommendation-System <img src="spotify.webp" alt="AI-Spotify-Recommendation-System" width="50">
+# AI-Spotify-Recommendation-System <img src="spotify.webp" alt="AI-Spotify-Recommendation-System" width="25">
 
 I'm currently planning to develop an AI-powered Spotify recommendation system that recommends songs/playlists based off of user recommendation and input. For example, they could input "running-vibe playlist", "songs like 'SONG_NAME'", "'SONG_ARTISTS' most popular songs'".
 
