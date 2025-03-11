@@ -4,6 +4,7 @@ import os
 import flask
 import dotenv
 import flask_cors
+from openai import OpenAI
 
 dotenv.load_dotenv()
 
@@ -27,10 +28,23 @@ except spotipy.SpotifyException as e:
     print("spotify authentication failed:", e)
     exit(1)
 
-# this recommends a song using just the spotify api
-# input the artist name and the song name to get accurate results  
-@app.route("/recommend", methods=["POST"])
+client = OpenAI()
+completion = client.chat.completions.create(
+    model="gpt-4o",
+    store=True,
+    messages=[
+        {"role": "user", "content": "write a haiku about ai"}
+    ]
+)
+
+# method where a user inputs a song and chatgpt recommends it 
+@app.route("/search",methods=["GET"])
 def recommend():
+
+
+# method that searches the spotify api for the song and returns it 
+@app.route("/recommend", methods=["POST"])
+def search():
 
     data = flask.request.json
 
@@ -54,39 +68,6 @@ def recommend():
     print("By artist:", song["artists"][0]["name"])
     print("Song ID:", song_id)
     print("Artist ID:", artist_id)
-
-    artist_info = sp.artist(artist_id)
-    genres = artist_info.get("genres", [])
-    genre_seed = genres[0] if genres else "pop"
-
-
-
-    try:
-        recommendations = sp.recommendations(
-            seed_tracks=[song_id], 
-            seed_artists=[artist_id],  
-            limit=5
-        )
-
-        if not recommendations["tracks"]:
-            print("No recommendations found for the given track.")
-            return flask.jsonify({"error": "no recommendations found"}), 404
-
-    except spotipy.exceptions.SpotifyException as e:
-        print("Spotify error:", e)
-        return flask.jsonify({"error": "Spotify API error. Could not get recommendations."}), 500
-
-    recommended_JSON = [
-        {
-            "name": track["name"],
-            "artist": track["artists"][0]["name"],
-            "spotify_url": track["external_urls"]["spotify"],
-            "preview_url": track["preview_url"]
-        }
-        for track in recommendations["tracks"]
-    ]
-    
-    return flask.jsonify(recommended_JSON)
 
 if __name__ == "__main__":
     app.run(debug=True)
