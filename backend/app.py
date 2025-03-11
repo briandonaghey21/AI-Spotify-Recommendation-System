@@ -15,7 +15,6 @@ SPOTIPY_CLIENT_ID = os.getenv("SPOTIPY_CLIENT_ID")
 SPOTIPY_CLIENT_SECRET = os.getenv("SPOTIPY_CLIENT_SECRET")
 
 OPENAI_KEY = os.getenv("OPENAI_KEY")
-openai.api_key = OPENAI_API_KEY
 
 if not SPOTIPY_CLIENT_ID or not SPOTIPY_CLIENT_SECRET:
     raise ValueError("Missing credentials")
@@ -30,14 +29,7 @@ except spotipy.SpotifyException as e:
     print("spotify authentication failed:", e)
     exit(1)
 
-client = OpenAI()
-completion = client.chat.completions.create(
-    model="gpt-4o",
-    store=True,
-    messages=[
-        {"role": "user", "content": "write a haiku about ai"}
-    ]
-)
+
 
 
 
