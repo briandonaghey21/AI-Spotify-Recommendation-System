@@ -14,7 +14,8 @@ flask_cors.CORS(app)
 SPOTIPY_CLIENT_ID = os.getenv("SPOTIPY_CLIENT_ID")
 SPOTIPY_CLIENT_SECRET = os.getenv("SPOTIPY_CLIENT_SECRET")
 
-OPENAI_KEY = os.getenv("OPENAI_KEY")
+
+openai.api_key = os.getenv("OPENAI_KEY")
 
 if not SPOTIPY_CLIENT_ID or not SPOTIPY_CLIENT_SECRET:
     raise ValueError("Missing credentials")
@@ -29,7 +30,8 @@ except spotipy.SpotifyException as e:
     print("spotify authentication failed:", e)
     exit(1)
 
-
+models = openai.Model.list()
+print([model["id"] for model in models["data"]])
 
 
 
@@ -40,14 +42,18 @@ def search():
     query = flask.request.args.get("query")
     if not query:
         return flask.jsonify({"error": "Missing 'query' parameter"}), 400
-    prompt =f"Recommend five songs based on this user's request: {query}"
+    prompt =f"Recommend five songs based on this user's request in the form (Song-Name, Artist): {query}"
     try:
+        # get request
+        # pay for the api
          response = openai.ChatCompletion.create(
-            model="gpt-4",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=50
+        model="gpt-4o-mini-2024-07-18",
+        messages=[{"role": "user", "content": prompt}],
+        max_tokens=100
         )
-         # TODO: search spotify using chatgpts response
+        
+         print(response["choices"][0]["message"]["content"])
+
          print("Searching Spotify for:", query)
          results = sp.search(q=query, limit=1, type="track")
          if not results["tracks"]["items"]:
