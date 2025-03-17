@@ -30,19 +30,17 @@ except spotipy.SpotifyException as e:
     print("spotify authentication failed:", e)
     exit(1)
 
-models = openai.Model.list()
-print([model["id"] for model in models["data"]])
-
 
 
 # method that searches the spotify api for the song and returns it 
-@app.route("/recommend_song", methods=["POST"])
+@app.route("/recommend_song", methods=["GET"])
 def search():
 
+    # this is actually crazy, open ai sometimes generates hypothetical song names
     query = flask.request.args.get("query")
     if not query:
         return flask.jsonify({"error": "Missing 'query' parameter"}), 400
-    prompt =f"Recommend five songs based on this user's request in the form (Song-Name, Artist): {query}"
+    prompt =f"Recommend ten songs available on spofity based on this user's request in the form and say nothing else. (Song-Name ; Artist): {query}"
     try:
         # get request
         # pay for the api
@@ -51,23 +49,27 @@ def search():
         messages=[{"role": "user", "content": prompt}],
         max_tokens=100
         )
-        
+
          print(response["choices"][0]["message"]["content"])
 
-         print("Searching Spotify for:", query)
-         results = sp.search(q=query, limit=1, type="track")
-         if not results["tracks"]["items"]:
-            print("No tracks found for query:", query)
-            return flask.jsonify({"error": "Song/artist not found"}), 404
-         """
-         song = results["tracks"]["items"][0]
-         song_id = song["id"]
-         artist_id = song["artists"][0]["id"]
-         print("Song name is:", song["name"])
-         print("By artist:", song["artists"][0]["name"])
-         print("Song ID:", song_id)
-         print("Artist ID:", artist_id)"
-         """
+         lines = response["choices"][0]["message"]["content"].split("\n")
+         songs = []
+         artists = []
+         
+         for recommendation in lines:
+             
+            info = recommendation.split(";")
+            if len(info) == 2:
+                song = info[0][3:]
+                print("Song: ",song)
+                artist = info[1].strip() 
+                print("Artist " ,artist)
+            else:
+                print("Skipping Invalid line")
+            #ok now search for the song and artist on spotify and make sure its valid
+
+         
+        
     except Exception as e:
         return flask.jsonify({"error": f"Failed to get song recommendation: {str(e)}"}), 500
 
