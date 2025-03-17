@@ -60,7 +60,7 @@ def search():
              
             info = recommendation.split(";")
             if len(info) == 2:
-                song = info[0][3:]
+                song = info[0][3:].strip()
                 artist = info[1].strip() 
                 print(f"Verifying '{song}' by '{artist}' exists...")
                 song_info = searchSpotify(song,artist)
@@ -70,7 +70,7 @@ def search():
                 else:
                     print("Song not found.")
                     extra_recommendations += 1
-                    
+
         # todo, while extra recommendations is > 0, generate songs using open ai
 
             else:
@@ -84,6 +84,8 @@ def search():
         
 
 def searchSpotify(song, artist):
+    song_name = song
+    artist_name = artist 
     query = f"track:{song_name} artist:{artist_name}"  
     results = sp.search(q=query, limit=1, type="track")
     if results["tracks"]["items"]:
