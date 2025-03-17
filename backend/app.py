@@ -61,15 +61,30 @@ def search():
             info = recommendation.split(";")
             if len(info) == 2:
                 song = info[0][3:]
-                print("Song: ",song)
                 artist = info[1].strip() 
-                print("Artist " ,artist)
+                print(f"Verifying '{song}' by '{artist}' exists...")
             else:
                 print("Skipping Invalid line")
-            #ok now search for the song and artist on spotify and make sure its valid
+            while searchSpotify(song, artist)
+
 
          
         
+
+def searchSpotify(song, artist):
+    query = f"track:{song_name} artist:{artist_name}"  
+    results = sp.search(q=query, limit=1, type="track")
+    if results["tracks"]["items"]:
+        song = results["tracks"]["items"][0]
+        song_info = {
+            "song_name": song["name"],
+            "artist": song["artists"][0]["name"],
+            "album": song["album"]["name"],
+            "spotify_url": song["external_urls"]["spotify"]
+        }
+        return song_info
+    else:
+        return None
     except Exception as e:
         return flask.jsonify({"error": f"Failed to get song recommendation: {str(e)}"}), 500
 
