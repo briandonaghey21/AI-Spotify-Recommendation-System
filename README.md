@@ -14,3 +14,4 @@ As I've been creating this project, something interesting I noticed is that open
 ### Reminders/TODO
 - Incorporate a feedback loop
 - Reinforcement Learning on bad-recommendations
+- Optimize 
