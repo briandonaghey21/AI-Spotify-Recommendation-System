@@ -12,7 +12,5 @@ As I've been creating this project, something interesting I noticed is that open
 5. Deployment probably with AWS
 
 ### Reminders/TODO
-- Change redirect URL on deployment
-- Postman for easy API testing
-- ~~Recommendation is deprecated, come up with a new plan~~ ~~Compare songs based on danceability, tempo, energy, etc., and use that for recommendations https://developer.spotify.com/documentation/web-api/reference/get-audio-features~~
-- `.giti
+- Incorporate a feedback loop
+- Reinforcement Learning on bad-recommendations
