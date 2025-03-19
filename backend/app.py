@@ -6,11 +6,21 @@ import dotenv
 import flask_cors
 import openai
 import json 
+import nltk
+
+from nltk.corpus import stopwords
+from textblob import TextBlob
+import spacy
+
+#todo: set up nlp
 
 # set up api keys and such
 dotenv.load_dotenv()
 app = flask.Flask(__name__)
 flask_cors.CORS(app)
+nlp = spacy.load("en_core_web_sm")
+nltk.download('stopwords')
+
 
 SPOTIPY_CLIENT_ID = os.getenv("SPOTIPY_CLIENT_ID")
 SPOTIPY_CLIENT_SECRET = os.getenv("SPOTIPY_CLIENT_SECRET")
@@ -32,6 +42,26 @@ except spotipy.SpotifyException as e:
     print("spotify authentication failed:", e)
     exit(1)
 
+
+# NLP function to clean and analyze query
+def process_query(user_query):
+
+    user_query = user_query.lower()
+    # tokenization
+    words = [word for word in user_query.split() if word not in stopwords.words('english')]
+
+    # gets keywords like genre, artist, etc.
+    doc = nlp(user_query)
+    entities = {ent.label_: ent.text for ent in doc.ents}
+    # positive, negative, neutral songs
+    sentiment_score = TextBlob(user_query).sentiment.polarity
+    sentiment = "positive" if sentiment_score > 0 else "negative" if sentiment_score < 0 else "neutral"
+
+    return {
+        "cleaned_query": " ".join(words),
+        "entities": entities,
+        "sentiment": sentiment
+    }
 
 # this is our bad song database, safely loads bad_songs.json
 def load_bad_songs():
@@ -89,6 +119,11 @@ def search():
     excluded_songs = [f"{entry['song_name']} - {entry['artist_name']}" for entry in bad_songs]
 
     query = flask.request.args.get("query")
+    processed_query = process_query(query)
+    genre = processed_query["entities"].get("GENRE")
+    artistQ = processed_query["entities"].get("PERSON")  # SpaCy often tags artists as PERSON
+    sentiment = processed_query["sentiment"]
+    
     if not query:
         return flask.jsonify({"error": "Missing 'query' parameter"}), 400
 
@@ -101,6 +136,10 @@ def search():
             Do not say anything else besides the recommendations and do not include numbers in the recommendation
             Do not make up fake songs or artists.
             If an artist is featured in the song, do not include it.
+            Consider these factors: 
+                - Sentiment: {sentiment} mood
+                - Preferred Genre: {genre if genre else "Any"}
+                - Artist preference: {artistQ if artistQ else "Any"}
             Do not include these songs, as they are either nonexistent, disliked, or already recommended: {', '.join(excluded_songs)}.
             """
             response = openai.ChatCompletion.create(
