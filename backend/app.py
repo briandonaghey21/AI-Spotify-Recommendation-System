@@ -12,7 +12,6 @@ from nltk.corpus import stopwords
 from textblob import TextBlob
 import spacy
 
-#todo: set up nlp
 
 # set up api keys and such
 dotenv.load_dotenv()
