@@ -36,11 +36,25 @@ except spotipy.SpotifyException as e:
 @app.route("/recommend_song", methods=["GET"])
 def search():
 
-    # this is actually crazy, open ai sometimes generates hypothetical song names
+    try:
+        with open(BAD_SONGS_FILE, "r") as f:
+            bad_songs = json.load(f)
+    except FileNotFoundError:
+        bad_songs = []
+    excluded_songs = [f"{entry['song_name']} - {entry['artist_name']}" for entry in bad_songs]
+
+
+    # open ai sometimes generates hypothetical song names
     query = flask.request.args.get("query")
     if not query:
         return flask.jsonify({"error": "Missing 'query' parameter"}), 400
-    prompt =f"Recommend fifteen songs available on spotify based on this user's request in the form and say nothing else. If there is a feature, don't include them in the song title. (Song-Name ; Artist): {query}"
+    prompt = f"""
+    Recommend fifteen real and popular songs available on Spotify based on this request: '{query}'.
+    Format each recommendation exactly as 'Song Name ; Artist' on a new line.
+    Do not say anything else besides the recommendations
+    Do not make up fake songs or artists.
+    Do not include these songs, as they are either nonexistent or disliked: {', '.join(excluded_songs)}.
+    """
     try:
          songs_info = []
          while len(songs_info) < 10:
@@ -74,7 +88,7 @@ def search():
     except Exception as e:
         return flask.jsonify({"error": f"Failed to get song recommendation: {str(e)}"}), 500
 
-# todo: create a cache that puts songs already recommended in it so chatgpt doesnt recommend it and create some sort of database to store wrong songs
+# todo: create a cache that puts songs already recommended in it so chatgpt doesnt recommend it
 
 
          
