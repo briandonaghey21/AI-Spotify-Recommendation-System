@@ -132,7 +132,7 @@ def search():
         songs_info = []
         while len(songs_info) < 16:
             prompt = f"""
-            Recommend sixteen real and popular songs available on Spotify based on this request: '{query}'.
+            Recommend sixteen real songs available on Spotify based on this request: '{query}'.
             Format each recommendation exactly as 'Song Name ; Artist' on a new line.
             Do not say anything else besides the recommendations and do not include numbers in the recommendation
             Do not make up fake songs or artists.
