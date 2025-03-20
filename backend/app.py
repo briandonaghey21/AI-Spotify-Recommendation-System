@@ -3,7 +3,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import os
 import flask
 import dotenv
-import flask_cors
+from flask_cors import CORS
 import openai
 import json 
 import nltk
@@ -15,8 +15,10 @@ import spacy
 
 # set up api keys and such
 dotenv.load_dotenv()
+
 app = flask.Flask(__name__)
-flask_cors.CORS(app)
+CORS(app) 
+
 nlp = spacy.load("en_core_web_sm")
 nltk.download('stopwords')
 
@@ -128,9 +130,9 @@ def search():
 
     try:
         songs_info = []
-        while len(songs_info) < 10:
+        while len(songs_info) < 16:
             prompt = f"""
-            Recommend fifteen real and popular songs available on Spotify based on this request: '{query}'.
+            Recommend sixteen real and popular songs available on Spotify based on this request: '{query}'.
             Format each recommendation exactly as 'Song Name ; Artist' on a new line.
             Do not say anything else besides the recommendations and do not include numbers in the recommendation
             Do not make up fake songs or artists.
@@ -162,7 +164,10 @@ def search():
                     if song_info:
                         print("Song successfully found")
                         songs_info.append(song_info)
+                        if len(song_info) >= 16:
+                            return flask.jsonify(songs_info)
                         excluded_songs.append(f"{song} - {artist}")
+                        
                     else:
                         print("Song not found.")
                         logBadSong(song, artist, query)

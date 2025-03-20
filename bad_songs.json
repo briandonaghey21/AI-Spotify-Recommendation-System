@@ -243,5 +243,15 @@
         "song_name": "Star",
         "artist_name": "Playboi Carti",
         "query": "playboi carti music 2025"
+    },
+    {
+        "song_name": "Train",
+        "artist_name": "Twenty One Pilots",
+        "query": "load"
+    },
+    {
+        "song_name": "4 Da Trap",
+        "artist_name": "21 Savage",
+        "query": "hype rap song"
     }
 ]

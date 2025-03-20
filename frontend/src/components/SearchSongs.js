@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "../searchStyles.css";
+import { motion } from "framer-motion";
 import playIcon from "../spotify_play.png";
 import spotifyLogo from "../spotify_logo.png"; 
 
@@ -10,7 +11,7 @@ const SearchSongs = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // fetch songs from Flask backend
+  // Fetch songs from Flask backend
   const fetchSongs = async () => {
     setError("");
     setLoading(true);
@@ -50,20 +51,35 @@ const SearchSongs = () => {
         </div>
       </div>
 
-      {loading && <p>Loading songs...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {loading && (
+        <div className="loading-container">
+          <div className="loading-dots">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      )}
 
+      {error && <p className="error-text">{error}</p>}
 
       <div className="songs-grid">
         {songs.map((song, index) => (
-          <div key={index} className="song-card">
-            <img src={song.album_cover} alt={song.song_name} />
-            <strong>{song.song_name}</strong> 
-            <p>{song.artist}</p>
+          <motion.div
+            key={index}
+            className="song-card"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.001}}
+            whileHover={{ scale: 1.1 }}
+          >
             <a href={song.spotify_url} target="_blank" rel="noopener noreferrer">
-              Listen on Spotify
+              <img src={song.album_cover} alt={song.song_name} className="album-cover"/>
+              <strong>{song.song_name}</strong>
+              <p>{song.artist}</p>
+              <button className="listen-button">Listen on Spotify</button>
             </a>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>
