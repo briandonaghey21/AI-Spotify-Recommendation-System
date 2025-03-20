@@ -6,6 +6,7 @@ I developed an AI-powered Spotify recommendation system that recommends songs/pl
 
 As I've been creating this project, something interesting I noticed is that openAI really seems to struggle when it comes to asking for song recommendations as it often recommends songs that don't exist. This proeject solved this issue
 
+### Warning: Generation takes a while when the API hasn't been called for a while due to the server its deployed on.
 
 ### TODO
 - Create a spotify playlist and send them a link
