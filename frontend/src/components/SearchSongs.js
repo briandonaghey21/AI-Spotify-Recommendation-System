@@ -42,7 +42,7 @@ const SearchSongs = () => {
           <input
             type="text"
             className="search-input"
-            placeholder="Give me a phrase to generate song predictions."
+            placeholder="Give me a phrase to generate songs"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
