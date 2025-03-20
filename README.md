@@ -12,6 +12,5 @@ As I've been creating this project, something interesting I noticed is that open
 5. Deployment probably with AWS
 
 ### Reminders/TODO
-- Incorporate a feedback loop
-- Reinforcement Learning on bad-recommendations
+- Create a spotify playlist and send them a link
 - Optimize 
