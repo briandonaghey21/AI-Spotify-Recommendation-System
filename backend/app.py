@@ -48,7 +48,7 @@ except spotipy.SpotifyException as e:
 def process_query(user_query):
 
     user_query = user_query.lower()
-    # tokenization
+    # tokenization # nltk
     words = [word for word in user_query.split() if word not in stopwords.words('english')]
 
     # gets keywords like genre, artist, etc.
