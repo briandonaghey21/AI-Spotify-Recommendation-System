@@ -18,7 +18,7 @@ const SearchSongs = () => {
     setSongs([]);
 
     try {
-      const response = await axios.get(`https://ai-spotify-recommendation-system.onrender.com`, {
+      const response = await axios.get(`https://ai-spotify-recommendation-system.onrender.com/recommend_song`, {
         params: { query },
       });
       setSongs(response.data);
