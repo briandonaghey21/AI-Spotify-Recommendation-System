@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/AI-Spotify-Recommendation-System/static/css/main.5577be32.css",
-    "main.js": "/AI-Spotify-Recommendation-System/static/js/main.b0c15f25.js",
+    "main.js": "/AI-Spotify-Recommendation-System/static/js/main.ee892cb9.js",
     "static/js/453.8ab44547.chunk.js": "/AI-Spotify-Recommendation-System/static/js/453.8ab44547.chunk.js",
     "static/media/spotify_play.png": "/AI-Spotify-Recommendation-System/static/media/spotify_play.45d343293f5ade10fc8d.png",
     "static/media/spotify_logo.png": "/AI-Spotify-Recommendation-System/static/media/spotify_logo.68cde57c8011cbf53815.png",
     "index.html": "/AI-Spotify-Recommendation-System/index.html",
     "main.5577be32.css.map": "/AI-Spotify-Recommendation-System/static/css/main.5577be32.css.map",
-    "main.b0c15f25.js.map": "/AI-Spotify-Recommendation-System/static/js/main.b0c15f25.js.map",
+    "main.ee892cb9.js.map": "/AI-Spotify-Recommendation-System/static/js/main.ee892cb9.js.map",
     "453.8ab44547.chunk.js.map": "/AI-Spotify-Recommendation-System/static/js/453.8ab44547.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.5577be32.css",
-    "static/js/main.b0c15f25.js"
+    "static/js/main.ee892cb9.js"
   ]
 }
